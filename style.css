@@ -1,0 +1,299 @@
+/*Title Box (header)*/
+#emptyBox {
+    margin: 72.594px;
+}
+#titleBox {
+    position: fixed;
+    margin: 0;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    min-width: 1000000;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0px -5px 10px gray;
+}
+#titleLogo {
+    margin-top: 0.8rem;
+    margin-bottom: 0.6rem;
+    margin-left: 1.8rem;
+}
+
+/*Input Box (article)*/
+
+#inputBox {
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 7rem;
+    margin-bottom: 3rem;
+}
+#inputBox > div {
+    margin: 0.5rem;
+}
+form {
+    display: inline-flex;
+    flex-direction: column;
+    border-radius: 5px;
+    margin: 0;
+}
+span {
+    font-family:"font.ttf";
+    font-size: 1.1rem;
+}
+form span {
+    border: 1px solid rgb(221, 221, 221);
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: 0;
+    padding-left: 1rem;
+    padding-top: 0.7rem;
+    width: 462px;
+    height: 36px;
+    color: #595959;
+    background-color: rgb(250, 250, 250);
+}
+textarea {
+    border: 1px solid rgb(221, 221, 221);
+    border-top: 1px solid rgb(240, 240, 240);
+    border-bottom: none;
+    width: 30rem;
+    overflow: hidden;
+    min-height: 300;
+    resize: none;
+    outline: none !important;
+    font-family: 'font.ttf';
+    font-weight: 100;
+    padding: 1rem;
+    font-size: 1.3rem;
+    margin: 0;
+}
+textarea:focus {
+    border: 1px solid rgb(67, 180, 222);
+    border-top: 1px solid rgb(240, 240, 240);
+    border-bottom: none;
+}
+#translateResultInput {
+    border: 1px solid rgb(221, 221, 221);
+    border-top: 1px solid rgb(240, 240, 240);
+    border-bottom: none;
+}
+textarea::selection{
+	color: black;
+	background-color: rgb(180, 233, 242);
+}
+::placeholder {
+  color: rgb(180, 180, 180);
+}
+input[type=submit] {
+    display: none;
+}
+
+/*(footer)*/
+footer {
+    display: block-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+footer:before {
+    display: block;
+    flex-direction: row;
+    width: 110px;
+    content:'';
+    border-top:1px solid rgb(200, 200, 200);
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.2rem;
+}
+footer > a {
+    margin: 0;
+}
+
+/*Buttons*/
+button {
+    font-family: "Roboto";
+    padding: 0;
+    margin: 3px;
+    border: 0;
+    outline: 0;
+    color: white;
+    background-color: rgb(67, 180, 222);
+    text-transform: uppercase;
+    border-radius: 0.15rem;
+
+    overflow: hidden;
+    position: relative;
+    
+}
+button .ripple {
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+}
+button[type=imagebutton] .ripple {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+#coinSentenceInputButtons {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+#coinSentenceInputButtons span {
+    position: absolute;
+    right: 10px;
+}
+.coinSentenceInputButtonClassHover {
+    border: 1px solid rgb(67, 180, 222);
+    border-bottom: none;
+}
+.coinSentenceInputButtonClass {
+    border: 1px solid rgb(221, 221, 221);
+    border-bottom: none;
+}
+div div button {
+    margin: 0;
+    width: 95px;
+    height: 48px;
+    font-family:"font.ttf";
+    font-size: 1.1rem;
+    border-radius: 0;
+}
+div div button:first-child {
+    border-bottom-left-radius: 4px;
+}
+div div button[type=imagebutton] {
+    width: 67px;
+    height: 48px;
+    background-color: white;
+    border-right: 1px solid rgb(240, 240, 240);
+}
+div div button[type=imagebutton]:hover {
+    animation-name: img_hover_change_color;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+div div button[type=imagebutton]:not(hover) { 
+    animation-name: img_nothover_change_color;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+.copyImageButton {
+    text-align: center
+}
+
+#coinSentenceInputButtons {
+    border-radius: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#coinSentenceResultButtons {
+    border-radius: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid rgb(221, 221, 221);
+    border-top: 1px solid rgb(240, 240, 240);
+    font-size: 0;
+}
+.coinSentenceInputButtonsClassHover {
+    border: 1px solid rgb(67, 180, 222);
+    border-top: 1px solid rgb(240, 240, 240);
+}
+.coinSentenceInputButtonsClass {
+    border: 1px solid rgb(221, 221, 221);
+    border-top: 1px solid rgb(240, 240, 240);
+}
+#textLength {
+    color: rgb(187, 187, 187);
+    margin: 11px;
+}
+button[type=button]:hover {
+    animation-name: hover_change_color;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+button[type=button]:not(hover) { 
+    animation-name: nothover_change_color;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+#icons {
+    display: inline-flex;
+    margin: 1rem;
+}
+#icons > a {
+    margin: 0.5rem;
+    border-radius: 100%;
+    border: 1px solid rgba(200, 200, 200, 0.5);
+    opacity: 0.7;
+}
+#icons > a{
+    box-shadow: 0 3px 5px -2px gray;
+}
+#icons > a:hover {
+    animation-name: icon_hover_change;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+}
+#icons > a:not(hover) {
+    animation-name: icon_nothover_change;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+}
+
+/*Animations*/
+@keyframes ripple {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+@keyframes hover {
+  from {box-shadow: none;}
+  to {box-shadow: 0 0 2px gray;}
+}
+@keyframes nothover {
+  to {box-shadow: none;}
+  from {box-shadow: 0 0 2px gray;}
+}
+@keyframes hover_change_color {
+  from {background-color: rgb(67, 180, 222);}
+  to {background-color: rgb(130, 219, 234);}
+}
+@keyframes nothover_change_color {
+  from {background-color: rgb(130, 219, 234);}
+  to {background-color: rgb(67, 180, 222);}
+}
+@keyframes img_hover_change_color {
+  from {background-color: white;}
+  to {background-color: rgba(180, 233, 242, 0.7);}
+}
+@keyframes img_nothover_change_color {
+  from {background-color: rgba(180, 233, 242, 0.7);}
+  to {background-color: white;}
+}
+@keyframes icon_hover_change {
+    from {
+        opacity: 0.7;
+        box-shadow: none;
+    }
+    to {
+        opacity: 1;
+        box-shadow: 0 0px 5px -1.5px gray;
+    }
+}
+@keyframes icon_nothover_change {
+    from {
+        opacity: 1;
+        box-shadow: 0 0px 5px -1.5px gray;
+    }
+    to {
+        opacity: 0.7;
+        box-shadow: none;
+    }
+}
