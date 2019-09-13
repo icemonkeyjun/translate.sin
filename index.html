@@ -1,49 +1,59 @@
 <html>
     <head>
         <title>신조어 번역기</title>
-        <link rel="icon" href="../images/browser_icon.png">
+        <link rel="icon" href="images/browser_icon.png">
+        <meta name="google-site-verification" content="zMl9VCgCmbPQSoWANnwgfH-JeM1T6Gzwcu40sNA6z4Q" />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="style-adding.css?1fdd1">
+        <link rel="stylesheet" type="text/css" href="style.css?aftersfddas">
         <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="fontello-68422b97/css/fontello.css">
-        <script src="../jquery-3.4.1.js"></script>
+        <script src="jquery-3.4.1.js"></script>
     </head>
+    
     <body>
         <header>
             <div id="emptyBox"></div>
             <div id="titleBox">
-                <a href="http://125.180.32.198" id="titleLogoLinker"><img src="../images/title.png" id="titleLogo" alt="Title" height=55></a>
+                <a href="http://125.180.32.198" id="titleLogoLinker"><img src="images/title.png" id="titleLogo" alt="Title"></a>
                 <div>
                     <a href="/adding"><span>신조어 등록</span></a>
                 </div>
             </div>
         </header>
         <article>
-            <div id="inputBoxes">
-                <br style="font-size: 0.5rem;">
-                <span id="requiredText" style="color:rgb(67, 180, 222);">* 필수 항목</span>
-                <div class="inputBoxContainer">
-                    <span>신조어<a style="color:rgb(67, 180, 222);"> *</a></span>
-                    <textarea id="newlyInput" rows="1" placeholder="ex) 금수저" autofocus></textarea>
+            <div id="inputBox">
+                <div>
+                    <form action="index.py">
+                        <span id="coinSentenceInputTitle">신조어</span>
+                        <textarea name="coinSentence" placeholder="신조어를 입력하세요." maxlength="100" id="coinSentenceInput" oninput="document.getElementById('textLength').textContent=document.getElementById('coinSentenceInput').value.length.toString() + '/' + document.getElementById('coinSentenceInput').maxLength.toString();inspectTime()" onkeydown="resize(this)" onfocus="document.getElementById('coinSentenceInputTitle').className='coinSentenceInputButtonClassHover';document.getElementById('coinSentenceInputButtons').className='coinSentenceInputButtonsClassHover'" onfocusout="document.getElementById('coinSentenceInputTitle').className='coinSentenceInputButtonClass';document.getElementById('coinSentenceInputButtons').className='coinSentenceInputButtonsClass'" autofocus></textarea>
+                    </form>
+                    <div id="coinSentenceInputButtons" class="coinSentenceInputButtonsClass">
+                        <button type="button" onclick="request_input_by_button(document.getElementById('coinSentenceInput').value);">번역</button>
+                        <span id="textLength">0/100</span>
+                        <button type="imagebutton" onclick="TTS(document.getElementById('coinSentenceInput').value);" title="듣기"><img src="images/speaker.png" width=27></button>
+                    </div>
                 </div>
-                <div class="inputBoxContainer">
-                    <span>순화어<a style="color:rgb(67, 180, 222);"> *</a></span>
-                    <textarea id="rarefyInput" rows="1" placeholder="ex) 부자"></textarea>
+
+                <div>
+                    <form action="index.py">
+                        <span>순화어</span>
+                        <textarea name="decl" id="translateResultInput" oninput="resize(this)" readonly></textarea>
+                    </form>
+                    <div id="coinSentenceResultButtons" class="coinSentenceResultButtonsClass">
+                        <button type="imagebutton" onclick="TTS(document.getElementById('translateResultInput').value);" title="듣기"><img src="images/speaker.png" width=27></button>
+                        <button type="imagebutton" onclick="declare();" title="번역 오류 신고"><img src="images/decl.png" width=27></button>
+                    </div>
                 </div>
-                <div class="inputBoxContainer">
-                    <span>신조어 설명</span>
-                    <textarea id="expInput"  rows="3" placeholder="ex) 태생적으로 타고난 부를 갖고 태어난 사람"></textarea>
-                </div>
-            </div>
-            <div id="footerButtonContainer">
-                <div id="footerTextContainer">
-                    <span style="color: rgb(255, 192, 0);" class="icon-warning" id="footerTextSpan1"> 등록한 신조어는 충돌 방지를 위해</span><br><span style="color: rgb(255, 192, 0);"  id="footerTextSpan2"> 운영자 검토 후 적용됩니다.</span>
-                </div>
-                <button type="button" id="submitButton" onclick="request_input_by_button();">등록</button>
             </div>
         </article>
-        <script  type="text/javascript">
+        <footer>
+            <div id="icons">
+                <a href="/twitter_redirect.html" class="icon-twitter"><img src="images/twitterIcon.png" alt="Twitter" width=35></a>
+                <a href="/facebook_redirect.html" class="icon-facebook"><img src="images/facebookIcon.png" alt="Facebook" width=35></a>
+                <a href="/kakaostory_redirect.html" class="icon-kakaostory"><img src="images/kakaostoryIcon.png" alt="KakaoStory" width=35></a>
+            </div>
+        </footer>
+        <script type="text/javascript">
             // console에 logging image
             (function(url) {
                   var image = new Image();
@@ -59,8 +69,12 @@
                       console.log('%c ', style);
                   };
                 image.src = url;
-            })('../images/title_s.png');
+            })('/images/title_s.png');
+
+            // coinSentenceInput의 내용 유지 + 커서를 제일 오른쪽으로
             
+            isDottedOnCoinSentenceInput = false;  // coinSentenceInput 뒤에 ...이 붙어 있는가? 
+            inspectTimeCount = 0;
             nowCanRequestInput = true;
             
             socket = new WebSocket("ws://125.180.32.198:7404");
@@ -83,22 +97,47 @@
                     }, 1500);
                 }
             }
-            function request_input_by_button() {
-                newlyValue = document.getElementById("newlyInput").value;
-                rarefyValue = document.getElementById("rarefyInput").value;
-                expValue = document.getElementById("expInput").value;
-                if (!(newlyValue === "" || rarefyValue === "")) {
-                    var json = {"type": "request_adding", "newly": newlyValue, "rarefy": rarefyValue, "exp": expValue};
-                    request_input(JSON.stringify(json));
-                    $("#newlyInput").val("")
-                    $("#rarefyInput").val("")
-                    $("#expInput").val("")
-                    alert("신조어 등록 요청이 완료되었습니다.");
-                } else {
-                    alert("필수 항목을 모두 채워주세요.");
-                }
+            function request_input_by_button(value) {
+                var json = {"type": "request_translate", "text": value};
+                request_input(JSON.stringify(json));
             }
+            
+            // coinSentenceInput에 입력한 후 0.5초동안 가만히 있으면 translate 요청
+            function inspectTime() {
+                if (!isDottedOnCoinSentenceInput) { // coinSentenceInput 뒤에 ...이 붙이기
+                    //document.getElementById('translateResultInput').value += "...";
+                    isDottedOnCoinSentenceInput = true;
+                }
+                inspectTimeCount += 1;
+                var currentInspectTimeCount = inspectTimeCount;
+                var value = document.getElementById("coinSentenceInput").value;
+                var check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+                setTimeout(function() {
+                    var coinSentence = document.getElementById("coinSentenceInput").value;
+                    console.log(nowCanRequestInput)
+                    if (value === coinSentence && inspectTimeCount === currentInspectTimeCount) {
+                        if (!check.test(value.slice(-1))) {
+                            //document.getElementById("submitbutton").click(); // submitbutton 클릭 (translate 요청)
+                            var json = {"type": "request_translate", "text": coinSentence};
+                            request_input(JSON.stringify(json));
+                        }
+                    }
+                }, 1000);
+            }
+            function declare() {
+                var json = {"type": "declare", "coined_text": lastTranslateHistory[0], "result_text": lastTranslateHistory[1]};
+                request_input(JSON.stringify(json));
+                alert("번역 오류 신고가 완료되었습니다.");
+            }
+            
+            function TTS(sentence) {
+                audio = new Audio("https://code.responsivevoice.org/getvoice.php?t=" + sentence + "&tl=ko&sv=g3&vn=&pitch=0.5&rate=0.5&vol=1&gender=male");
+                audio.play();
+            }
+            
+            document.getElementById('textLength').textContent=document.getElementById('coinSentenceInput').value.length.toString() + '/' + document.getElementById('coinSentenceInput').maxLength.toString()
         </script>
-        <script type="text/javascript" src="../button-design.js"></script>
+        <script type="text/javascript" src="button-design.js"></script>
+        <script type="text/javascript" src="textarea-auto-resize.js"></script>
     </body>
 </html>
