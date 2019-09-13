@@ -1,0 +1,207 @@
+#emptyBox {
+    margin: 72.594px;
+}
+#titleBox {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    min-width: 1000000;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0px -5px 10px gray;
+}
+#titleBox > div {
+    margin-top: 27px;
+    margin-left: 20px;
+}
+#titleBox > div > a {
+    color: rgb(32, 146, 186);
+    text-decoration: none;
+}
+#titleBox > div > a > span {
+    font-family: "../font-regular.ttf";
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+#titleLogo {
+    margin-top: 0.8rem;
+    margin-bottom: 0.6rem;
+    margin-left: 1.8rem;
+}
+article {
+    text-align: center;
+    margin-top: 7rem;
+}
+#inputBoxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.inputBoxContainer {
+    display: flex;
+    margin: 0.7rem;
+}
+.inputBoxContainer > span {
+    padding-top: 12px;
+    padding-right: 10px;
+    width: 94.625px;
+    font-size: 1.1rem;
+    color: #919191;
+}
+#footerTextContainer {
+    padding-left: 100px;
+}
+#footerTextSpan1 {
+    margin-top: 0.7rem;
+}
+#footerTextSpan2 {
+    padding-left: 18px;
+}
+
+textarea {
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 5px;
+    width: 30rem;
+    overflow: hidden;
+    resize: none;
+    outline: none !important;
+    font-family: '../font.ttf';
+    font-weight: 100;
+    padding: 0.5rem;
+    font-size: 1.3rem;
+    margin: 0;
+}
+textarea:focus {
+    border: 1px solid rgb(67, 180, 222);
+}
+#translateResultInput {
+    border: 1px solid rgb(221, 221, 221);
+}
+textarea::selection{
+	color: black;
+	background-color: rgb(180, 233, 242);
+}
+::placeholder {
+  color: rgb(210, 210, 210);
+}
+#requiredText {
+    margin-bottom: 0.5rem;
+    padding-right: 290px;
+}
+
+#submitButton {
+    margin: 0.7rem;
+    margin-left: 500px;
+}
+
+button {
+    font-family: "Roboto";
+    padding: 0;
+    margin: 3px;
+    border: 0;
+    outline: 0;
+    color: white;
+    background-color: rgb(67, 180, 222);
+    text-transform: uppercase;
+    border-radius: 0.15rem;
+
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    width: 95px;
+    height: 48px;
+    font-family:"../font.ttf";
+    font-size: 1.1rem;
+    border-radius: 4px;
+    
+}
+button[type=button]:hover {
+    animation-name: hover_change_color;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+button[type=button]:not(hover) { 
+    animation-name: nothover_change_color;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+button .ripple {
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+@keyframes hover_change_color {
+  from {background-color: rgb(67, 180, 222);}
+  to {background-color: rgb(130, 219, 234);}
+}
+@keyframes nothover_change_color {
+  from {background-color: rgb(130, 219, 234);}
+  to {background-color: rgb(67, 180, 222);}
+}
+
+
+
+@media(max-width:610px) {
+    article {
+        text-align: left;
+        margin-top: 80px;
+    }
+    #titleLogo {
+        height: 40px;
+        margin-left: 20px;
+    }
+    #titleBox > div {
+        margin-top: 22px;
+        margin-left: 10px;
+    }
+    #titleBox > div > a > span {
+        font-size: 1rem;
+    }
+    #inputBoxes {
+        display: block;
+    }
+    .inputBoxContainer {
+        display: inline-block;
+    }
+    .inputBoxContainer > span {
+        padding-left: 5px;
+    }
+    .inputBoxContainer > textarea {
+        margin-top: 5px;
+    }
+    textarea {
+        width: calc(90vw);
+    }
+    #requiredText {
+        padding-right: 0;
+        padding-left: 15px;
+        margin-top: 15px;
+    }
+    #submitButton {
+        margin-left: calc(100vw - 95px - 5vw);
+    }
+    #footerTextContainer {
+        padding-left: 0;
+        font-size: 0.9rem;
+    }
+    #footerTextSpan1 {
+    padding-left: 10px;
+    }
+    #footerTextSpan2 {
+        padding-left: 35px;
+    }
+}
